@@ -1,0 +1,21 @@
+.p-2 {
+	padding: 20rpx;
+}
+
+.m-2 {
+	margin: 20rpx;
+}
+
+.flex {
+	display: flex;
+}
+
+/* 纵轴）上居中放置 */
+.align-center {
+	align-items: center;
+}
+/* 项目位于各行之间留有空白的容器内 */
+.justify-space-between {
+	justify-content: space-between;
+}
+
