@@ -1,5 +1,27 @@
+/* #ifndef APP-PLUS-NVUE */
+
+.scroll-row {
+	white-space: nowrap;
+	width: 100%;
+}
+.scroll-item {
+	display: inline-block !important;
+}
+/* #endif */
+
 .w-100 {
 	width: 100%;
+}
+
+.p-2 {
+	padding: 20rpx;
+}
+.p-4 {
+	padding: 40rpx;
+}
+
+.p-6 {
+	padding: 60rpx;
 }
 
 .p-2 {
@@ -51,4 +73,18 @@
 
 .main-text {
 	color: #fd597c;
+}
+
+.font-sm {
+	font-size: 20rpx;
+}
+.font-ml {
+	font-size: 30rpx;
+}
+.font-lg {
+	font-size: 40rpx;
+}
+
+.border-b {
+	border-bottom: 1rpx solid #eee;
 }
