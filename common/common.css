@@ -1,0 +1,90 @@
+/* #ifndef APP-PLUS-NVUE */
+
+.scroll-row {
+	white-space: nowrap;
+	width: 100%;
+}
+.scroll-item {
+	display: inline-block !important;
+}
+/* #endif */
+
+.w-100 {
+	width: 100%;
+}
+
+.p-2 {
+	padding: 20rpx;
+}
+.p-4 {
+	padding: 40rpx;
+}
+
+.p-6 {
+	padding: 60rpx;
+}
+
+.p-2 {
+	padding: 20rpx;
+}
+
+.m-2 {
+	margin: 20rpx;
+}
+
+.border-radius {
+	border-radius: 50%;
+}
+
+.b-r-5 {
+	border-radius: 5rpx;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-1 {
+	flex: 1
+}
+
+/* 纵轴）上居中放置 */
+.align-center {
+	align-items: center;
+}
+
+/* 项目位于各行之间留有空白的容器内 */
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.follow {
+	background: #fd597c;
+	padding: 10rpx 8rpx;
+	line-height: 1;
+	text-align: center;
+	border-radius: 4rpx;
+	color: #FFFFFF;
+}
+
+.main-text {
+	color: #fd597c;
+}
+
+.font-sm {
+	font-size: 20rpx;
+}
+.font-ml {
+	font-size: 30rpx;
+}
+.font-lg {
+	font-size: 40rpx;
+}
+
+.border-b {
+	border-bottom: 1rpx solid #eee;
+}
