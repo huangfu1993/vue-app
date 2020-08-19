@@ -195,6 +195,12 @@
 				url: '/pages/search/search',
 			})
 		},
+		onNavigationBarButtonTap() {
+			console.log(1111111111)
+			uni.navigateTo({
+				url: '/pages/addInput/addInput',
+			})
+		},
 		beforeMount() {
 			this.getData().then(res => {
 				this.list = res;

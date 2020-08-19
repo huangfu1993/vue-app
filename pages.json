@@ -55,6 +55,13 @@
 					}
 				}
 			}
+		}, {
+			"path": "pages/addInput/addInput",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
 		}
 	],
 	"globalStyle": {
