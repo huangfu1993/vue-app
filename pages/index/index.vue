@@ -1,6 +1,5 @@
 <template>
 	<view class="p-2">
-
 		<scroll-view scroll-x scroll-with-animation show-scrollbar :scroll-into-view="'tab' + tabSelect" class="flex scroll-row"
 		 style="height: 100rpx;">
 			<text v-for="(item, index) in tabList" :key="index" :id="'tab' + index" class="w-100 p-2" :class="tabSelect === index ? 'main-text font-lg' : 'font-ml'"
@@ -9,11 +8,12 @@
 
 		<swiper :current='tabSelect' :current-item-id="index" @change="swipeChange" :style="'height:' + swipeHeight + 'px;'">
 			<swiper-item v-for="(swiperItem, index) in tabList" :key="index">
-				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'" @scrolltolower="scrolltolowerBottom(index)">
-					<template v-if="swiperItem.tabItemList.length">
-						<home-list v-for="(item, index) in swiperItem.tabItemList" :key="index" :item="item" :index="index" @follow="follow"
+				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'" 
+					@scrolltolower="scrolltolowerBottom(index)">
+					<template v-if="list[index] && list[index].tabItemList.length">
+						<home-list v-for="(item, listIndex) in list[index].tabItemList" 
+							:key="listIndex" :item="item" :index="listIndex" @follow="follow"
 						 @support="support">
-
 						</home-list>
 						<view class="flex align-center justify-center">
 							{{swiperItem.showMoreDateText}}
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-	import HomeList from '../../components/common/HomeList.vue';
+	import HomeList from '@/components/common/HomeList.vue';
 	const data = [{
 			portrait: '../../static/log/img.jpg',
 			nickname: '小红',
@@ -144,6 +144,10 @@
 		}
 	];
 	export default {
+		components: {
+			HomeList
+		},
+
 		data() {
 			return {
 				swipeHeight: 0,
@@ -186,10 +190,14 @@
 				}
 			});
 		},
-
+		onNavigationBarSearchInputClicked() {
+			uni.navigateTo({
+				url: '/pages/search/search',
+			})
+		},
 		beforeMount() {
 			this.getData().then(res => {
-				this.tabList = res;
+				this.list = res;
 			});
 		},
 
@@ -222,7 +230,6 @@
 								id: index,
 							}
 						});
-						console.log(dataItems, 'dataItems')
 						reslove(dataItems);
 						uni.hideLoading();
 					}, 1000);
@@ -235,11 +242,12 @@
 				this.tabSelect = index;
 			},
 			follow(isFollow, index) {
-				this.list[index].isFollow = isFollow;
+				
+				this.list[this.tabSelect]['tabItemList'][index].isFollow = isFollow;
 			},
 
 			support(support, index) {
-				const item = this.list[index];
+				const item = this.list[this.tabSelect]['tabItemList'][index];
 				if (item.operationType.type === support) {
 					return;
 				}
@@ -260,20 +268,13 @@
 				}
 
 				item.operationType.type = support;
-				this.list[index] = item;
+				this.list[this.tabSelect]['tabItemList'][index] = item;
 			}
 		},
 
-		components: {
-			HomeList
-		}
 	}
 </script>
 
 <style>
-	page {
-		.subSitle {
-			font-size: 30rpx;
-		}
-	}
+
 </style>

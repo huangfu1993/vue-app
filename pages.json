@@ -1,39 +1,62 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"app-plus": {
-				"titleNView": {
-					"searchInput": {
-						"disabled": true,
-						"align": "center",
-						"backgroundColor": "#f5f4f2",
-						"borderRadius": "4px",
-						"placeholder": "搜索帖子",
-						"placeholderColor":"#6c6d67"
-					},
-					"buttons": [
-						{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"disabled": true,
+							"align": "center",
+							"backgroundColor": "#f5f4f2",
+							"borderRadius": "4px",
+							"placeholder": "搜索帖子",
+							"placeholderColor": "#6c6d67"
+						},
+						"buttons": [{
 							"colorPressed": "#fd597c",
-							"float":"right",
-							"fontSize":"16px",
+							"float": "right",
+							"fontSize": "16px",
 							"fontSrc": "./static/iconfont.ttf",
 							"text": "\ue651"
-						}
-					]
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/my/my",
+			"style": {}
+		}, {
+			"path": "pages/news/news",
+			"style": {}
+		}, {
+			"path": "pages/msg/msg",
+			"style": {}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"searchInput": {
+							"disabled": false,
+							"align": "center",
+							"backgroundColor": "#f5f4f2",
+							"borderRadius": "4px",
+							"placeholder": "搜索帖子",
+							"placeholderColor": "#6c6d67"
+						},
+						"buttons": [{
+							"colorPressed": "#fd597c",
+							"float": "right",
+							"fontSize": "16px",
+							"fontSrc": "./static/iconfont.ttf",
+							"text": "搜索"
+						}]
+					}
 				}
 			}
 		}
-	}, {
-		"path": "pages/my/my",
-		"style": {}
-	}, {
-		"path": "pages/news/news",
-		"style": {}
-	}, {
-		"path": "pages/msg/msg",
-		"style": {}
-	}],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "社区交友",

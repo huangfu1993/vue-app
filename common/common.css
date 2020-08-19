@@ -42,10 +42,15 @@
 
 .flex {
 	display: flex;
+	flex-wrap: ;
 }
 
 .flex-1 {
 	flex: 1
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
 }
 
 /* 纵轴）上居中放置 */
@@ -75,14 +80,17 @@
 	color: #fd597c;
 }
 
-.font-sm {
-	font-size: 20rpx;
-}
-.font-ml {
+.font {
 	font-size: 30rpx;
 }
+.font-sm {
+	font-size: 25rpx;
+}
+.font-ml {
+	font-size: 35rpx;
+}
 .font-lg {
-	font-size: 40rpx;
+	font-size: 45rpx;
 }
 
 .border-b {
