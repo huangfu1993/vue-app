@@ -152,6 +152,7 @@
 			return {
 				swipeHeight: 0,
 				tabSelect: 0,
+					
 				tabList: [{
 						name: "关注"
 					},
@@ -196,7 +197,6 @@
 			})
 		},
 		onNavigationBarButtonTap() {
-			console.log(1111111111)
 			uni.navigateTo({
 				url: '/pages/addInput/addInput',
 			})

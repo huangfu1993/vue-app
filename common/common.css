@@ -80,6 +80,10 @@
 	color: #fd597c;
 }
 
+.main-bg {
+	background: #fd597c;
+}
+
 .font {
 	font-size: 30rpx;
 }
@@ -93,6 +97,25 @@
 	font-size: 45rpx;
 }
 
+.position-bottom {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.bg-white {
+	background: #fff;
+}
+
 .border-b {
 	border-bottom: 1rpx solid #eee;
+}
+
+.po-re {
+	position: relative;
+}
+
+.po-ab {
+	position: absolute;
 }
