@@ -74,6 +74,13 @@
 							}
 						});
 					} else {
+						uni.setStorage({
+							key: "APPINOUT",
+							data: JSON.stringify({}),
+							success() {
+								uni.navigateBack();
+							}
+						})
 						uni.navigateBack()
 					}
 				}
