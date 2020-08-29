@@ -8,7 +8,7 @@
 		<textarea v-model="textareavalue" placeholder="说一句话吧~" class="uni-textarea" />
 		<!-- 图片上传 -->
 		
-		<upload-image @imageListChange="imageListChange"></upload-image>
+		<upload-image @imageListChange="imageListChange" :listCatch="imageList"></upload-image>
 		<!-- 底部操作条 -->
 		<view class="position-bottom bg-white flex align-center" style="height: 85rpx;">
 			<view class="bottomLeftAction animate__animated" hover-class="animate__jello">菜单</view>
@@ -35,70 +35,47 @@
 		},
 		
 		onLoad() {
-			
 			try {
-				
-				// uni.getStorage({
-				// 	key: "app-input",
-				// 	success: res => {
-				// 		console.log(res, 11111111111)
-				// 	},
-				// 	fail: err => console.log(err, '请求错误')
-				// })
-				
-				const cache = uni.getStorageSync("app-input");
-				
-				console.log(cache, 'cache');
-				// if (cache) {
-				// 	const obj = JSON.parse(cache);
-					
-				// 	if (obj.textareavalue) {
-				// 		this.textareavalue = obj.textareavalue
-				// 	}
-					
-				// 	if (Array.isArray(obj.imageList)) {
-				// 		this.imageList = obj.imageList
-				// 	}
-				// }
+				uni.getStorage({
+					key: "APPINOUT",
+					success: res => {
+						const thisObj = JSON.parse(res.data) || {};
+						this.textareavalue = thisObj.value;
+						this.imageList = thisObj.list
+					},
+					fail: err => console.err(err, '请求错误')
+				})
 			} catch (err) {
-				console.log(err)
+				throw err
 			}
 		},
-
 		methods: {
 			imageListChange(list) {
 				this.imageList = list;
 			},
 			clickLeft() {
-				uni.navigateBack()
-				// console.log(!!this.textareavalue, !!this.imageList.length)
-				// if (!!this.textareavalue || !!this.imageList.length) {
-				// 	uni.showModal({
-				// 			title: '提示',
-				// 			content: '是否保存为草稿？',
-				// 			success: function (res) {
-				// 				if (res.confirm) {
-				// 					uni.setStorageSync("app-inpu", JSON.stringify({ list: this.imageList, value: this.textareavalue }))
-				// 					setTimeout(() => {
-				// 						// uni.navigateBack()
-				// 						console.log(uni.getStorageSync("app-input"), 'uni.getStorageSync("app-input")')
-				// 					}, 1000)
-				// 						// uni.setStorage({
-				// 						// 	key: "app-input",
-				// 						// 	data: JSON.stringify({ list: this.imageList, value: this.textareavalue }),
-				// 						// 	success() {
-				// 						// 		console.log(uni.getStorageSync("app-input"), 'uni.getStorageSync("app-input")')
-				// 						// 		// uni.navigateBack()
-				// 						// 	}
-				// 						// })
-				// 				} else if (res.cancel) {
-				// 						uni.navigateBack()
-				// 				}
-				// 			}
-				// 		});
-				// 	} else {
-				// 		uni.navigateBack()
-				// 	}
+				if (!!this.textareavalue || !!this.imageList.length) {
+					uni.showModal({
+							title: '提示',
+							content: '是否保存为草稿？',
+							success: res => {
+								if (res.confirm) {
+									const obj = { list: this.imageList, value: this.textareavalue };
+									uni.setStorage({
+										key: "APPINOUT",
+										data: JSON.stringify(obj),
+										success() {
+											uni.navigateBack();
+										}
+									})
+								} else if (res.cancel) {
+										uni.navigateBack()
+								}
+							}
+						});
+					} else {
+						uni.navigateBack()
+					}
 				}
 		}
 	}

@@ -3,23 +3,21 @@
 		<view class="uni-common-mt">
 			<form>
 				<view class="list-pd">
-					<view class="cell-pd">
-						<view class="uni-uploader">
-							<view class="uni-uploader-head">
-								<view class="uni-uploader-title">点击可预览选好的图片</view>
-								<view class="uni-uploader-info">{{imageList.length}}/9</view>
-							</view>
-							<view class="uni-uploader-body">
-								<view class="uni-uploader__files">
-									<block v-for="(image,index) in imageList" :key="index">
-										<view class="uni-uploader__file b-r-5 po-re">
-											<text class="iconfont icon-ashbin po-ab deleteIcon" @click="deleteImage(index)"></text>
-											<image class="uni-uploader__img" style="height: 100%;" :src="image" :data-src="image" mode="aspectFill" @tap="previewImage"></image>
-										</view>
-									</block>
-									<view class="uni-uploader__input-box b-r-5">
-										<view class="uni-uploader__input b-r-5" @tap="chooseImage"></view>
+					<view class="uni-uploader">
+						<view class="uni-uploader-head">
+							<view class="uni-uploader-title">点击可预览选好的图片</view>
+							<view class="uni-uploader-info">{{imageList.length}}/9</view>
+						</view>
+						<view class="uni-uploader-body">
+							<view class="uni-uploader__files">
+								<block v-for="(image,index) in imageList" :key="index">
+									<view class="uni-uploader__file b-r-5 po-re">
+										<text class="iconfont icon-ashbin po-ab deleteIcon" @click="deleteImage(index)"></text>
+										<image class="uni-uploader__img" style="height: 100%;" :src="image" :data-src="image" mode="aspectFill" @tap="previewImage"></image>
 									</view>
+								</block>
+								<view class="uni-uploader__input-box b-r-5">
+									<view class="uni-uploader__input b-r-5" @tap="chooseImage"></view>
 								</view>
 							</view>
 						</view>
@@ -42,6 +40,7 @@
 		['compressed', 'original']
 	]
 	export default {
+		props: ['listCatch'],
 		data() {
 			return {
 				title: 'choose/previewImage',
@@ -54,6 +53,11 @@
 				count: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 			}
 		},
+		mounted() {
+			console.log(this.listCatch, '缓存');
+			this.imageList = this.listCatch || [];
+		},
+		
 		onUnload() {
 			this.imageList = [],
 				this.sourceTypeIndex = 2,
