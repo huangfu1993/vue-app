@@ -41,7 +41,7 @@
 					success: res => {
 						const thisObj = JSON.parse(res.data) || {};
 						this.textareavalue = thisObj.value;
-						this.imageList = thisObj.list
+						this.imageList = thisObj.list || [];
 					},
 					fail: err => console.err(err, '请求错误')
 				})
@@ -80,13 +80,8 @@
 							}
 						});
 					} else {
-						uni.setStorage({
-							key: "APPINOUT",
-							data: JSON.stringify({}),
-							success() {
-								uni.navigateBack();
-							}
-						})
+						console.log(11111111);
+						uni.navigateBack();
 					}
 				}
 		}

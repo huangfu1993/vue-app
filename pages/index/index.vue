@@ -10,8 +10,8 @@
 			<swiper-item v-for="(swiperItem, index) in tabList" :key="index">
 				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'" 
 					@scrolltolower="scrolltolowerBottom(index)">
-					<template v-if="list[index] && list[index].tabItemList.length">
-						<home-list v-for="(item, listIndex) in list[index].tabItemList" 
+					<template v-if="swiperItem.tabItemList && swiperItem.tabItemList.length">
+						<home-list v-for="(item, listIndex) in swiperItem.tabItemList" 
 							:key="listIndex" :item="item" :index="listIndex" @follow="follow"
 						 @support="support">
 						</home-list>
@@ -201,15 +201,18 @@
 				url: '/pages/addInput/addInput',
 			})
 		},
+		
 		beforeMount() {
 			this.getData().then(res => {
-				this.list = res;
+				console.log(res, 'res');
+				this.tabList = res;
 			});
 		},
 
 		methods: {
 			scrolltolowerBottom(i) {
 				this.tabList[i].showMoreDateText = '加载中...';
+				console.log(this.tabList[i]);
 				setTimeout(() => {
 					this.tabList[i].tabItemList = this.tabList[i].tabItemList.concat(data);
 					this.tabList[i].showMoreDateText = '下拉加载更多...';
@@ -236,6 +239,7 @@
 								id: index,
 							}
 						});
+						
 						reslove(dataItems);
 						uni.hideLoading();
 					}, 1000);
@@ -247,13 +251,13 @@
 			tabClick(index) {
 				this.tabSelect = index;
 			},
+			
 			follow(isFollow, index) {
-				
-				this.list[this.tabSelect]['tabItemList'][index].isFollow = isFollow;
+				this.tabList[this.tabSelect]['tabItemList'][index].isFollow = isFollow;
 			},
 
 			support(support, index) {
-				const item = this.list[this.tabSelect]['tabItemList'][index];
+				const item = this.tabList[this.tabSelect]['tabItemList'][index];
 				if (item.operationType.type === support) {
 					return;
 				}
@@ -274,7 +278,7 @@
 				}
 
 				item.operationType.type = support;
-				this.list[this.tabSelect]['tabItemList'][index] = item;
+				this.tabList[this.tabSelect]['tabItemList'][index] = item;
 			}
 		},
 
