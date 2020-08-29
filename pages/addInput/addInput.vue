@@ -69,7 +69,13 @@
 										}
 									})
 								} else if (res.cancel) {
-										uni.navigateBack()
+									uni.setStorage({
+										key: "APPINOUT",
+										data: JSON.stringify({}),
+										success() {
+											uni.navigateBack();
+										}
+									})
 								}
 							}
 						});
@@ -81,7 +87,6 @@
 								uni.navigateBack();
 							}
 						})
-						uni.navigateBack()
 					}
 				}
 		}
