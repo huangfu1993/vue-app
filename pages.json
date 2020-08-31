@@ -27,7 +27,11 @@
 			"style": {}
 		}, {
 			"path": "pages/news/news",
-			"style": {}
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
 		}, {
 			"path": "pages/msg/msg",
 			"style": {}
@@ -83,12 +87,12 @@
 			"text": "动态",
 			"iconPath": "static/dynamic.png",
 			"selectedIconPath": "static/dynamiced.png",
-			"pagePath": "pages/msg/msg"
+			"pagePath": "pages/news/news"
 		}, {
 			"text": "消息",
 			"iconPath": "static/news.png",
 			"selectedIconPath": "static/newsed.png",
-			"pagePath": "pages/news/news"
+			"pagePath": "pages/msg/msg"
 		}, {
 			"text": "我的",
 			"iconPath": "static/my.png",

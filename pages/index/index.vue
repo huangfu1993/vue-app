@@ -204,7 +204,6 @@
 		
 		beforeMount() {
 			this.getData().then(res => {
-				console.log(res, 'res');
 				this.tabList = res;
 			});
 		},
@@ -212,7 +211,6 @@
 		methods: {
 			scrolltolowerBottom(i) {
 				this.tabList[i].showMoreDateText = '加载中...';
-				console.log(this.tabList[i]);
 				setTimeout(() => {
 					this.tabList[i].tabItemList = this.tabList[i].tabItemList.concat(data);
 					this.tabList[i].showMoreDateText = '下拉加载更多...';

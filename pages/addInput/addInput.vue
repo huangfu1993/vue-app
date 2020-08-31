@@ -80,7 +80,6 @@
 							}
 						});
 					} else {
-						console.log(11111111);
 						uni.navigateBack();
 					}
 				}
