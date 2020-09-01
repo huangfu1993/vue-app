@@ -97,6 +97,17 @@
 	font-size: 45rpx;
 }
 
+.font-main-color {
+	color: rgba(0, 0, 0, 0.85);
+}
+
+.font-second-color {
+	color: rgba(0, 0, 0, 0.65);
+}
+.font-three-color {
+	color: rgba(0, 0, 0, 0.45);
+}
+
 .position-bottom {
 	position: fixed;
 	left: 0;

@@ -66,6 +66,11 @@
 					"titleNView": false
 				}
 			}
+		}, {
+			"path": "pages/newsMore/newsMore",
+			"style": {
+				
+			}
 		}
 	],
 	"globalStyle": {

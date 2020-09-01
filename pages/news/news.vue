@@ -2,16 +2,16 @@
 	<view class="w-100">
 		<uni-nav-bar :border="false" :statusBar="true" :fixed="true">
 			<view class="flex align-center justify-center w-100" style="">
-				<view class=" font-lg m-2" :class="{'main-text': type === 'follow' }" @click="type = 'follow'">
+				<view class=" font-ml m-2" :class="[{'main-text': type === 'follow'}, {'font-lg': type === 'follow' }]" @click="type = 'follow'">
 					关注
 				</view>
-				<view class="font-lg m-2" :class="{'main-text': type === 'topic' }" @click="type = 'topic'">
+				<view class="font-ml m-2" :class="[{'main-text': type === 'topic'},{'font-lg': type === 'topic' }]" @click="type = 'topic'">
 					话题
 				</view>
 			</view>
 			<text class="iconfont icon-bi" slot="right"></text>
 		</uni-nav-bar>
-		<swiper :current="type === 'follow' ? 0 : 1 " :current-item-id="index" @change="swipeChange" :style="'height:' + swipeHeight + 'px;'">
+		<swiper :current="type === 'follow' ? 0 : 1 " @change="swipeChange" :style="'height:' + swipeHeight + 'px;'">
 			<swiper-item>
 				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'">
 					<template v-if="list.length">
@@ -29,69 +29,18 @@
 			</swiper-item>
 
 			<swiper-item>
-				<view class="">
-					<view class="flex justify-between p-2">
+				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'">
+					<template>
 						<view>
-							热门分类
+							<topic></topic>
 						</view>
-						<view class="">
-							更多
-						</view>
-					</view>
-					<view class="flex">
-						<view class="m-2 hotItem font-sm" v-for="(item, index) in hotList" :key="index">
-							{{item.name}}
-						</view>
-					</view>
-					<view class="border"></view>
-				</view>
-
-				<view class="m-2 flex align-center justify-center" style="background-color: #F8F8F8; height: 100rpx;">
-					<text class="iconfont icon-gonggong-sousuo" style="margin-right: 10rpx;"></text> 搜索话题
-				</view>
-
-				<view class="p-2">
-					<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="5000" :duration="500">
-						<swiper-item>
-							<view>
-								<image src="../../static/image/dada.jpg" mode="" style="height: 300rpx; width: 100%;" mode="aspectFill"></image>
-							</view>
-						</swiper-item>
-						<swiper-item>
-							<view>
-								<image src="../../static/image/h2.jpg" mode="" style="height: 300rpx; width: 100%;" mode="aspectFill"></image>
-							</view>
-						</swiper-item>
-						<swiper-item>
-							<view>
-								<image src="../../static/image/h3.jpg" mode="" style="height: 300rpx; width: 100%;" mode="aspectFill"></image>
-							</view>
-						</swiper-item>
-					</swiper>
-
-					<view>
 						<view>
-							最近更新
+							<block v-for="(item, index) in updateObj" :key="index">
+								<nearest :item="item"></nearest>
+							</block>
 						</view>
-
-						<view class="flex">
-							<view>
-								<image src="../../static/log/23.jpg" mode="" class="lately"></image>
-							</view>
-							<view>
-								<view>
-									话题名称
-								</view>
-								<view>
-									话题描述
-								</view>
-								<view>
-									动态42 今日 0
-								</view>
-							</view>
-						</view>
-					</view>
-				</view>
+					</template>
+				</scroll-view>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -99,6 +48,9 @@
 
 <script>
 	import HomeList from '@/components/common/HomeList.vue';
+	import topic from '@/components/common/topic.vue';
+	import nearest from '@/components/common/nearest';
+
 	const data = [{
 			portrait: '../../static/log/img.jpg',
 			nickname: '小红',
@@ -214,6 +166,8 @@
 	export default {
 		components: {
 			HomeList,
+			nearest,
+			topic,
 		},
 
 		data() {
@@ -235,7 +189,44 @@
 					name: '军事'
 				}, {
 					name: '经济'
-				}, ]
+				}],
+				updateObj: [{
+					title: "今日说法",
+					imageUrl: "../../static/log/23.jpg",
+					describe: "话题描述",
+					dynamic: 67,
+					todayDynamic: 10
+				}, {
+					title: "下班看电影",
+					imageUrl: "../../static/log/12.jpg",
+					describe: "这个电影很好看",
+					dynamic: 67,
+					todayDynamic: 10
+				}, {
+					title: "一起去逛街啊",
+					imageUrl: "../../static/log/354.jpg",
+					describe: "最近没衣服穿了",
+					dynamic: 67,
+					todayDynamic: 10
+				}, {
+					title: "来喝酒啊",
+					imageUrl: "../../static/log/eee.jpg",
+					describe: "全是女的",
+					dynamic: 67,
+					todayDynamic: 10
+				}, {
+					title: "下班开黑啊",
+					imageUrl: "../../static/log/fff.jpg",
+					describe: "上分万岁",
+					dynamic: 67,
+					todayDynamic: 10
+				}, {
+					title: "回家带娃啊",
+					imageUrl: "../../static/log/img.jpg",
+					describe: "娃真好看",
+					dynamic: 67,
+					todayDynamic: 10
+				}],
 			};
 		},
 		onLoad() {
@@ -265,7 +256,6 @@
 				})
 			},
 			swipeChange(d) {
-				console.log(d, '哈哈哈哈哈')
 				this.type = d.target.current === 1 ? 'topic' : 'follow';
 			},
 			tabClick(index) {
@@ -322,12 +312,5 @@
 		height: 2rpx;
 		width: 100%;
 		background-color: #d6d6d6;
-	}
-
-	.lately {
-		width: 150rpx;
-		height: 150rpx;
-		border-radius: 4rpx;
-		margin-right: 20rpx;
 	}
 </style>
