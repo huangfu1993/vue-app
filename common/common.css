@@ -63,6 +63,10 @@
 	justify-content: space-between;
 }
 
+	
+.justify-around {
+	justify-content: space-around;
+}
 .justify-center {
 	justify-content: center;
 }
@@ -97,6 +101,10 @@
 	font-size: 45rpx;
 }
 
+.font-weigth {
+	font-weight: 900;
+}
+
 .font-main-color {
 	color: rgba(0, 0, 0, 0.85);
 }
@@ -105,6 +113,9 @@
 	color: rgba(0, 0, 0, 0.65);
 }
 .font-three-color {
+	color: rgba(0, 0, 0, 0.45);
+}
+.font-lower-color {
 	color: rgba(0, 0, 0, 0.45);
 }
 
@@ -129,4 +140,10 @@
 
 .po-ab {
 	position: absolute;
+}
+
+.text-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

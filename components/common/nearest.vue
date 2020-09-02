@@ -1,5 +1,5 @@
 <template>
-	<view  class="flex">
+	<view class="flex" @click="openTopicDetails">
 		<view>
 			<image :src="item.imageUrl" mode="" class="lately"></image>
 		</view>
@@ -16,13 +16,21 @@
 				<text style="margin: 20rpx">今日</text>
 				<text>{{ item.todayDynamic }}</text>
 			</view>
-	</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	export default {
 		props: ["item"],
+		methods: {
+			openTopicDetails() {
+				console.log('aaaaaaaaa')
+				uni.navigateTo({
+					url: `../../pages/topicDetails/topicDetails?detail=${JSON.stringify(this.item)}`
+				})
+			}
+		}
 	}
 </script>
 

@@ -69,7 +69,25 @@
 		}, {
 			"path": "pages/newsMore/newsMore",
 			"style": {
-				
+
+			}
+		}, {
+			"path": "pages/topicDetails/topicDetails",
+			"style": {}
+		},
+		{
+			"path": "pages/topicDetails/topicDetails",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type":"transparent",
+						"buttons": [
+							{
+								"type":"menu"
+							}
+						]
+					}
+				}
 			}
 		}
 	],

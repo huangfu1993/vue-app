@@ -1,36 +1,42 @@
 <template>
-	<view class="p-2">
-		<scroll-view scroll-x scroll-with-animation show-scrollbar :scroll-into-view="'tab' + tabSelect" class="flex scroll-row"
-		 style="height: 100rpx;">
-			<text v-for="(item, index) in tabList" :key="index" :id="'tab' + index" class="w-100 p-2" :class="tabSelect === index ? 'main-text font-lg' : 'font-ml'"
-			 @click="tabClick(index)">{{item.name}}</text>
-		</scroll-view>
+	<view>
+		<TopicInfo :details="details" />
+		<HorizontalBar></HorizontalBar>
+		<view class="p-2">
+			<view class="flex align-center font">
+				<text class="iconfont icon-gonggong-remen" style="color: red"></text>
+				<text class="text-ellipsis">【热点介绍】 焦点关注，今天的太阳真大，气温达到了43度，鸡蛋都孵出小鸡了，</text>
+			</view>
 
-		<swiper :current='tabSelect' :current-item-id="index" @change="swipeChange" :style="'height:' + swipeHeight + 'px;'">
-			<swiper-item v-for="(swiperItem, index) in tabList" :key="index">
-				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'" 
-					@scrolltolower="scrolltolowerBottom(index)">
-					<template v-if="swiperItem.tabItemList && swiperItem.tabItemList.length">
-						<home-list v-for="(item, listIndex) in swiperItem.tabItemList" 
-							:key="listIndex" :item="item" :index="listIndex" @follow="follow"
-						 @support="support">
-						</home-list>
-						<view class="flex align-center justify-center">
-							{{swiperItem.showMoreDateText}}
-						</view>
-					</template>
-					<template v-else>
-						<view class="flex align-center justify-center p-6">
-							暂无数据....
-						</view>
-					</template>
-				</scroll-view>
-			</swiper-item>
-		</swiper>
+			<view class="flex align-center font" style="50rpx">
+				<text class="iconfont icon-gonggong-remen" style="color: red"></text>
+				<text class="text-ellipsis">【热点介绍】 丧心病狂，好心帮助老大爷过马路，他竟然这样做，</text>
+			</view>
+		</view>
+
+		<HorizontalBar></HorizontalBar>
+
+		<view>
+			<view class="flex justify-around w-100 p-2">
+				<view :class="tabSelect === 'default' ? 'main-text font-ml font-weigth' : 'font'" @click="tabClick('default')">
+					默认
+				</view>
+				<view :class="tabSelect === 'newest' ? 'main-text font-ml font-weigth' : 'font'" @click="tabClick('newest')">
+					最新
+				</view>
+			</view>
+			<block v-for="(item, index) in topicList" :key="index">
+				<view class="p-2">
+					<HomeList :item="item" @follow="follow" @support="support" :index="index" />
+				</view>
+			</block>
+
+		</view>
 	</view>
 </template>
 
 <script>
+	import TopicInfo from '@/components/common/topicInfo.vue';
 	import HomeList from '@/components/common/HomeList.vue';
 	const data = [{
 			portrait: '../../static/log/img.jpg',
@@ -143,119 +149,52 @@
 			id: 6
 		}
 	];
+
 	export default {
 		components: {
+			TopicInfo,
 			HomeList
 		},
-
 		data() {
 			return {
-				swipeHeight: 0,
-				tabSelect: 0,
-					
-				tabList: [{
-						name: "关注"
-					},
-					{
-						name: "推荐"
-					},
-					{
-						name: "体育"
-					},
-					{
-						name: "热点"
-					},
-					{
-						name: "财经"
-					},
-					{
-						name: "娱乐"
-					},
-					{
-						name: "军事"
-					},
-					{
-						name: "历史"
-					},
-					{
-						name: "本地"
-					},
-				],
-				list: []
+				details: {},
+				topicList: [],
+				tabSelect: 'default'
 			}
 		},
-		onLoad() {
-			uni.getSystemInfo({
-				success: d => {
-					this.swipeHeight = d.windowHeight - uni.upx2px(100);
-				}
+		onLoad(e) {
+			const top = JSON.parse(e.detail);
+			this.details = top;
+			this.getList().then(res => {
+				uni.hideLoading();
+				this.topicList = res;
 			});
 		},
-		onNavigationBarSearchInputClicked() {
-			uni.navigateTo({
-				url: '/pages/search/search',
-			})
-		},
-		onNavigationBarButtonTap() {
-			uni.navigateTo({
-				url: '/pages/addInput/addInput',
-			})
-		},
-		
-		beforeMount() {
-			this.getData().then(res => {
-				this.tabList = res;
-			});
-		},
-
 		methods: {
-			scrolltolowerBottom(i) {
-				this.tabList[i].showMoreDateText = '加载中...';
-				setTimeout(() => {
-					this.tabList[i].tabItemList = this.tabList[i].tabItemList.concat(data);
-					this.tabList[i].showMoreDateText = '下拉加载更多...';
-				}, 500)
-			},
-			getData() {
+			getList(type) {
 				uni.showLoading({
-					title: '请求数据中...',
-				});
+					title: "加载中..."
+				})
 				return new Promise((resolve, reject) => {
 					setTimeout(() => {
-						const dataItems = this.tabList.map((item, index) => {
-							if (index < 2) {
-								return {
-									name: item.name,
-									showMoreDateText: '下拉加载更多...',
-									tabItemList: data,
-									id: index,
-								}
-							}
-							return {
-								name: item.name,
-								tabItemList: [],
-								id: index,
-							}
-						});
-						
-						resolve(dataItems);
-						uni.hideLoading();
-					}, 1000);
+						const list = type === 'default' ? data : data.reverse()
+						resolve(list);
+					}, 300)
+				});
+			},
+			tabClick(tab) {
+				this.tabSelect = tab;
+				this.getList().then(res => {
+					this.topicList = res;
+					uni.hideLoading();
 				})
 			},
-			swipeChange(d) {
-				this.tabSelect = d.target.current;
-			},
-			tabClick(index) {
-				this.tabSelect = index;
-			},
-			
 			follow(isFollow, index) {
-				this.tabList[this.tabSelect]['tabItemList'][index].isFollow = isFollow;
+				this.topicList[index].isFollow = isFollow;
 			},
 
 			support(support, index) {
-				const item = this.tabList[this.tabSelect]['tabItemList'][index];
+				const item = this.topicList[index];
 				if (item.operationType.type === support) {
 					return;
 				}
@@ -276,13 +215,20 @@
 				}
 
 				item.operationType.type = support;
-				this.tabList[this.tabSelect]['tabItemList'][index] = item;
+				this.topicList[index] = item;
 			}
 		},
-
 	}
 </script>
 
 <style>
+	.subTitle {
+		z-index: 20;
+	}
 
+	.image {
+		height: 150rpx;
+		width: 150rpx;
+		margin-top: -75rpx;
+	}
 </style>
