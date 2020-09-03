@@ -34,7 +34,27 @@
 			}
 		}, {
 			"path": "pages/msg/msg",
-			"style": {}
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "消息列表",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"colorPressed": "#fd597c",
+							"float": "left",
+							"fontSize": "16px",
+							"fontSrc": "./static/iconfont.ttf",
+							"text": "\ue608"
+						}, {
+							"colorPressed": "#fd597c",
+							"float": "right",
+							"fontSize": "16px",
+							"fontSrc": "./static/iconfont.ttf",
+							"text": "\ue60d"
+						}]
+					}
+				}
+			}
 		},
 		{
 			"path": "pages/search/search",
@@ -80,12 +100,10 @@
 			"style": {
 				"app-plus": {
 					"titleNView": {
-						"type":"transparent",
-						"buttons": [
-							{
-								"type":"menu"
-							}
-						]
+						"type": "transparent",
+						"buttons": [{
+							"type": "menu"
+						}]
 					}
 				}
 			}

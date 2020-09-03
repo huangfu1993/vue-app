@@ -46,18 +46,8 @@
 				badgeStyle: ''
 			};
 		},
-		watch: {
-			text() {
-				this.setStyle()
-			}
-		},
-		mounted() {
-			this.setStyle()
-		},
+		
 		methods: {
-			setStyle() {
-				this.badgeStyle = `width: ${String(this.text).length * 8 + 12}px`
-			},
 			onClick() {
 				this.$emit('click');
 			}
@@ -72,16 +62,13 @@
 		/* #endif */
 		justify-content: center;
 		flex-direction: row;
-		height: 20px;
-		line-height: 20px;
 		color: #333;
-		border-radius: 100px;
+		border-radius: 100rpx;
 		background-color: #f1f1f1;
 		background-color: transparent;
 		text-align: center;
 		font-family: 'Helvetica Neue', Helvetica, sans-serif;
 		font-size: 12px;
-		padding: 0px 6px;
 	}
 
 	.uni-badge--inverted {
