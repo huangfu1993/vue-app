@@ -107,6 +107,34 @@
 					}
 				}
 			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"app-plus": {
+					"animationType": "slide-in-left",
+					"titleNView": {
+						"searchInput": {
+							"disabled": false,
+							"align": "center",
+							"backgroundColor": "#f5f4f2",
+							"borderRadius": "4px",
+							"placeholder": "搜索用户",
+							"placeholderColor": "#6c6d67",
+							"disabled": true
+						},
+						"autoBackButton": false,
+						"buttons": [{
+							"colorPressed": "#fd597c",
+							"float": "right",
+							"fontSize": "16px",
+							"color": "#333333",
+							"fontSrc": "./static/iconfont.ttf",
+							"text": "取消"
+						}]
+					}
+				}
+
+			}
 		}
 	],
 	"globalStyle": {

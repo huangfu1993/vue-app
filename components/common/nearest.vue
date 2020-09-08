@@ -25,7 +25,6 @@
 		props: ["item"],
 		methods: {
 			openTopicDetails() {
-				console.log('aaaaaaaaa')
 				uni.navigateTo({
 					url: `../../pages/topicDetails/topicDetails?detail=${JSON.stringify(this.item)}`
 				})

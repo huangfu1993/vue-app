@@ -32,7 +32,6 @@
 		watch: {
 			details: {
 				handler: function(val, oldval) {
-					console.log(val, 'val');
 					if (JSON.stringify(oldval) !== JSON.stringify(val)) {
 						this.details = val
 					}

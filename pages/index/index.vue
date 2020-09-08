@@ -6,7 +6,7 @@
 			 @click="tabClick(index)">{{item.name}}</text>
 		</scroll-view>
 
-		<swiper :current='tabSelect' :current-item-id="index" @change="swipeChange" :style="'height:' + swipeHeight + 'px;'">
+		<swiper :current='tabSelect' :current-item-id="tabSelect" @change="swipeChange" :style="'height:' + swipeHeight + 'px;'">
 			<swiper-item v-for="(swiperItem, index) in tabList" :key="index">
 				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'" 
 					@scrolltolower="scrolltolowerBottom(index)">

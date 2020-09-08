@@ -141,12 +141,21 @@
 			}
 		},
 		onNavigationBarButtonTap(e) {
+			if (e.index === 0) {
+				uni.navigateTo({
+					url:"../user/user"
+				});
+			}
+
 			if (e.index === 1) {
 				this.$refs.popup.open();
 			}
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
+			this.onRefresh();
+		},
+		onLoad() {
 			this.onRefresh();
 		},
 		methods: {
@@ -168,7 +177,7 @@
 	.border-bottom {
 		border-bottom: 1rpx solid rgba(0, 0, 0, .15);
 	}
-	
+
 	.light {
 		background-color: #E5E5E5;
 	}
