@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view @click="openChat">
 		<view class="flex p-2">
 			<view>
 				<image :src="item.portrait" mode="aspectFill" style="width: 85rpx; height: 85rpx; border-radius: 50%; margin-right: 20rpx;"></image>
@@ -27,6 +27,14 @@
 		props: {
 			item: Object,
 			index: Number
+		},
+		 
+		methods: {
+			openChat() {
+				uni.navigateTo({
+					url: `../../pages/chatWindow/chatWindow?friend=${JSON.stringify(this.item)}`
+				})
+			}
 		}
 	}
 </script>

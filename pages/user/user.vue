@@ -12,7 +12,7 @@
 				<scroll-view scroll-y="true" :style="'height:' + swipeHeight + 'px;'" @scrolltolower="scrolltolowerBottom(index)">
 					<template v-if="swiperItem.followList && swiperItem.followList.length">
 						<block v-for="(item, index) in swiperItem.followList">
-							<view>
+							<view @click="openChat">
 								<view class="flex p-2">
 									<view><image :src="item.portrait" mode="aspectFill" style="width: 85rpx; height: 85rpx; border-radius: 50%; margin-right: 20rpx;"></image></view>
 									<view class="flex-1">
@@ -46,7 +46,7 @@ export default {
 			grouping: [
 				{
 					name: '关注',
-					followList: [],
+					followList: []
 				},
 				{
 					name: '互关',
@@ -78,7 +78,6 @@ export default {
 	},
 	beforeMount() {
 		this.getData().then(res => {
-			console.log(res);
 			this.grouping = res;
 		});
 	},
@@ -92,7 +91,7 @@ export default {
 					const dataItems = this.grouping.map((item, index) => {
 						return {
 							...item,
-							followList: index === 0 ? [] : data,
+							followList: data,
 							id: index
 						};
 					});
@@ -107,6 +106,11 @@ export default {
 		},
 		swipeChange(d) {
 			this.tabSelect = d.target.current;
+		},
+		openChat() {
+			uni.navigateTo({
+				url: `../../pages/chatWindow/chatWindow?friend=${JSON.stringify(this.item)}`
+			});
 		}
 	}
 };

@@ -135,6 +135,23 @@
 				}
 
 			}
+		}, {
+			"path": "pages/chatWindow/chatWindow",
+			"style": {
+				"app-plus": {
+					"bounce":"none",
+					"titleNView": {
+						"titleText": "",
+						"buttons": [{
+							"colorPressed": "#fd597c",
+							"float": "right",
+							"fontSize": "16px",
+							"fontSrc": "./static/iconfont.ttf",
+							"text": "\ue608"
+						}]
+					}
+				}
+			}
 		}
 	],
 	"globalStyle": {
