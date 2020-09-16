@@ -5886,6 +5886,11 @@ var render = function() {
           _c("v-uni-input", {
             staticClass: _vm._$g(8, "sc"),
             attrs: { type: "text", value: "", "adjust-position": false, _i: 8 },
+            on: {
+              confirm: function($event) {
+                return _vm.$handleViewEvent($event)
+              }
+            },
             model: {
               value: _vm._$g(8, "v-model"),
               callback: function($$v) {

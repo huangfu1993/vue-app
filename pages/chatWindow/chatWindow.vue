@@ -8,7 +8,7 @@
 		</scroll-view>
 		<view class="chatDetail p-2"></view>
 		<view class="fiexBottom flex align-center justify-center p-2">
-			<input type="text" value="" class="flex-1 border" v-model="userNews" :adjust-position="false"/>
+			<input type="text" value="" class="flex-1 border" v-model="userNews" :adjust-position="false" @confirm="sendNews"/>
 			<view class="action flex align-center justify-center animate__animated" hover-class="animate__jello" @click="sendNews">发送</view>
 		</view>
 	</view>
